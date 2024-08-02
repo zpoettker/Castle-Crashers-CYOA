@@ -1,1 +1,26 @@
+body {
+    background-color:bisque;
+    font-size: 30px;
+    font-family: sans-serif;
+}
 
+.game {
+    width: 500px;
+    height: 500px;
+    background-color:rgb(227, 196, 159);
+    border: 3px solid grey;
+    border-radius: 5px;
+}
+
+.stats {
+    border-bottom: 3px solid grey;
+    height: 60px;
+    width: 500px;
+}
+
+.controls {
+    border-bottom: 3px solid grey;
+    height: 60px;
+    width: 500px;
+    background-color:rgb(206, 178, 145)
+}
