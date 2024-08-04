@@ -45,3 +45,9 @@ const locations = [
       text: "You enter the cave. You see some monsters."
     }
   ];
+
+  button1.onclick = goStore;
+  button2.onclick = oddJob;
+  button3.onclick = goCave;
+
+  
