@@ -44,7 +44,7 @@ button {
 }
 
 button:hover {
-    background-color: #bd8632;
+    background-image: linear-gradient(#fbc336, #f59a11);
 }
 
 .text {
