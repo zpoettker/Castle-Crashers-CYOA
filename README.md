@@ -8,3 +8,5 @@ Story: I would like to make it like castle crashers I think. You are a knight in
 As I said I would like a gold system, which you gain randomly and for killing bosses. Food will be for gaining health and not dying.
 
 I may add a training level or 'odd job' level to earn coins without fighting bosses, just incase of buying a poor weapon, the boss is to tough, or you just use your coins to fast.
+
+I would like to add some skill, and randomness to the game to allow for different playing experiences.
