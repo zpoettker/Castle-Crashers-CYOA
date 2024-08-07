@@ -10,3 +10,5 @@ As I said I would like a gold system, which you gain randomly and for killing bo
 I may add a training level or 'odd job' level to earn coins without fighting bosses, just incase of buying a poor weapon, the boss is to tough, or you just use your coins to fast.
 
 I would like to add some skill, and randomness to the game to allow for different playing experiences.
+
+I would also like to add different paths or 'short cuts' to change how the game works.
