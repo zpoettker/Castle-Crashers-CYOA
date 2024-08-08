@@ -102,13 +102,33 @@ function buyFood(){
 else {console.log("error")};
 }
 
+
+function updateFood(hea){
+  health += hea;
+  food -= 1;
+  healthText.innerText = health;
+  foodText.innerText = food;
+}
+
+
 function eatFood(){
-  if (food >= 1 && health <= 99 && health > 65) {
+  if (food >= 1 && health <= 99 && health > 74) {
       health = 100;
       food -= 1;
       healthText.innerText = health;
       foodText.innerText = food;
   }
+else if(food >= 1 && health <= 74 && health > 50) {
+  updateFood(25);
+}
+else if(food >= 1 && health <= 50 && health > 30) {
+  updateFood(35)
+}
+else if(food >= 1 && health <= 30 && health > 0) {
+  updateFood(50)
+}
+
+
 }
 
 function buyWeapon(){
