@@ -34,8 +34,8 @@ const locations = [
     },
     {
       name: "store",
-      "button text": ["Buy 10 health (10 gold)", "Buy weapon (30 gold)", "Go to town square"],
-      "button functions": [buyHealth, buyWeapon, goTown],
+      "button text": ["Buy 1 food (10 gold)", "Buy weapon (30 gold)", "Go to town square"],
+      "button functions": [buyFood, buyWeapon, goTown],
       text: "You enter the store."
     },
     {
@@ -90,6 +90,8 @@ function buyFood(){
   if (food < 10 && gold >= 10) {
   food += 1;
   gold -= 10;
+  goldText.innerText = gold;
+  foodText.innerText = food;
   }
   else if (gold < 10) {
   text.innerText = "You don't have enough gold! Better get a job..."
@@ -98,6 +100,15 @@ function buyFood(){
     text.InnerText = "Leave some food for the rest of us!"
   }
 else {console.log("error")};
+}
+
+function eatFood(){
+  if (food >= 1 && health <= 99 && health > 65) {
+      health = 100;
+      food -= 1;
+      healthText.innerText = health;
+      foodText.innerText = food;
+  }
 }
 
 function buyWeapon(){
