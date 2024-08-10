@@ -1,4 +1,4 @@
-let food = 0;
+let food = 2;
 let health = 100;
 let gold = 50;
 let currentWeaponIndex = 0;
@@ -34,8 +34,8 @@ const locations = [
     },
     {
       name: "store",
-      "button text": ["Buy 10 health (10 gold)", "Buy weapon (30 gold)", "Go to town square"],
-      "button functions": [buyHealth, buyWeapon, goTown],
+      "button text": ["Buy 1 food (10 gold)", "Buy weapon (30 gold)", "Go to town square"],
+      "button functions": [buyFood, buyWeapon, goTown],
       text: "You enter the store."
     },
     {
@@ -45,6 +45,7 @@ const locations = [
       text: "You enter the cave. You see some monsters."
     }
   ];
+
 
   // initialize buttons
 button1.onclick = goStore;
@@ -81,8 +82,55 @@ function fightDragon(){
   console.log("hello");
 }
 function buyHealth(){
-  console.log("hello");
+console.logO("hello");
 }
+
+function buyFood(){
+
+  if (food < 10 && gold >= 10) {
+  food += 1;
+  gold -= 10;
+  goldText.innerText = gold;
+  foodText.innerText = food;
+  }
+  else if (gold < 10) {
+  text.innerText = "You don't have enough gold! Better get a job..."
+  }
+  else if(food = 10) {
+    text.InnerText = "Leave some food for the rest of us!"
+  }
+else {console.log("error")};
+}
+
+
+function updateFood(hea){
+  health += hea;
+  food -= 1;
+  healthText.innerText = health;
+  foodText.innerText = food;
+}
+
+
+function eatFood(){
+  if (food >= 1 && health <= 99 && health > 74) {
+      health = 100;
+      food -= 1;
+      healthText.innerText = health;
+      foodText.innerText = food;
+  }
+else if(food >= 1 && health <= 74 && health > 50) {
+  updateFood(25);
+}
+else if(food >= 1 && health <= 50 && health > 30) {
+  updateFood(35)
+}
+else if(food >= 1 && health <= 30 && health > 0) {
+  updateFood(50)
+}
+
+
+}
+
 function buyWeapon(){
   console.log("hello");
 }
