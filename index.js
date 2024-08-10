@@ -1,4 +1,4 @@
-let food = 7;
+let food = 2;
 let health = 100;
 let gold = 50;
 let currentWeaponIndex = 0;
