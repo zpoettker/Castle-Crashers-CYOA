@@ -1,4 +1,4 @@
-let food = 2;
+let food = 7;
 let health = 100;
 let gold = 50;
 let currentWeaponIndex = 0;
@@ -11,9 +11,9 @@ const button2 = document.querySelector("#button2");
 const button3 = document.querySelector("#button3");
 
 const text = document.querySelector(".text");
-const foodText = document.querySelector(".foodText");
+const foodText = document.querySelector("#foodText");
 const healthText = document.querySelector(".healthText");
-const goldText = document.querySelector(".goldText");
+const goldText = document.querySelector("#goldText");
 const monsterStats = document.querySelector(".monsterStats");
 const monsterName = document.querySelector(".monsterName");
 const monsterHealthText = document.querySelector(".monsterHealth");
@@ -97,7 +97,7 @@ function buyFood(){
   text.innerText = "You don't have enough gold! Better get a job..."
   }
   else if(food = 10) {
-    text.InnerText = "Leave some food for the rest of us!"
+    text.innerText = "Leave some food for the rest of us!"
   }
 else {console.log("error")};
 }
