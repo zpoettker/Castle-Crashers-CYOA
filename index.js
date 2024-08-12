@@ -44,6 +44,18 @@ const locations = [
       "button functions": [fightSlime, fightBeast, goTown],
       text: "You enter the cave. You see some monsters."
     },
+    {
+      name: "jobwrong",
+      "button text": ["Play again", "Burn down job", "Go to town square"],
+      "button functions": [oddJob, burnJob, goTown],
+      text: "Your answer was incorrect.. I hope your better at fighting monsters.. \n \n"
+    },
+    {
+      name: "jobright",
+      "button text": ["Play again", "Buy a beer", "Go to town square"],
+      "button functions": [oddJob, buyBeer , goTown],
+      text: "That's right! You aren't cheating are you?\n \n"
+    }
   ];
 
   const trivia = [
@@ -68,7 +80,7 @@ const locations = [
     {
       name: "4",
       "button text": ["Arrows", "Fire", "Lightning"],
-      "button functions": [wrong, right, wrong],
+      "button functions": [wrong, wrong, right],
       text: "In the original Castle Crasher's game, what was the magic power posessed by the 'red' knight?"
     },
     {
@@ -83,7 +95,7 @@ const locations = [
   // initialize buttons
 button1.onclick = goStore;
 button2.onclick = goCave;
-button3.onclick = fightDragon;
+button3.onclick = oddJob;
 
  function update(location){
   button1.innerText = location["button text"][0];
@@ -176,6 +188,26 @@ function oddJob() {
   update(trivia[(Math.floor(Math.random()*5)) - 1])
 }
 
-function wrong() {}
+function wrong() {
+  update(locations[3]);
+  gold--;
+  goldText.innerText = gold;
+  text.innerText += "-1 GOLD";
+}
 
-function right() {}
+function right() {
+  update(locations[4]);
+  gold += 5;
+  goldText.innerText = gold;
+  text.innerText += "+5 GOLD";
+}
+
+function burnJob() {
+  console.log("burn down the place");
+}
+
+function buyBeer() {
+  console.log("you bought a beer then that beer bought a beer");
+}
+
+//need to fix random number selector, I think it would be better to just have a list of questions instead, this way we could guarentee that no answers will be repeated, once you get through all the questions you are done, and we can provide an answer key
