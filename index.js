@@ -1,6 +1,6 @@
 let food = 1;
 let health = 100;
-let gold = 500;
+let gold = 50;
 let currentWeapon = 0;
 let fighting;
 let monsterHealth;
