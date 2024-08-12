@@ -1,7 +1,7 @@
 let food = 1;
 let health = 100;
-let gold = 50;
-let currentWeaponIndex = 0;
+let gold = 500;
+let currentWeapon = 0;
 let fighting;
 let monsterHealth;
 let inventory = ["stick"];
@@ -14,15 +14,17 @@ const text = document.querySelector(".text");
 const foodText = document.querySelector("#foodText");
 const healthText = document.querySelector(".healthText");
 const goldText = document.querySelector("#goldText");
+const weaponText = document.querySelector("#weaponText");
 const monsterStats = document.querySelector(".monsterStats");
 const monsterName = document.querySelector(".monsterName");
 const monsterHealthText = document.querySelector(".monsterHealth");
 
 const weapons = [
-    {name: 'stick', power: 10},
-    {name: 'sharp fish', power: 25},
-    {name: 'light saber', power: 50},
-    {name: 'dragon sword', power: 100}
+    {name: 'Stick', power: 10},
+    {name: 'Sharp Fish', power: 25},
+    {name: 'Sledge Hammer', power: 35},
+    {name: 'Light Saber', power: 50},
+    {name: 'Dragon Sword', power: 100}
 ]
 
 const locations = [
@@ -34,7 +36,7 @@ const locations = [
     },
     {
       name: "store",
-      "button text": ["Buy 1 food (10 gold)", "Buy weapon (30 gold)", "Go to town square"],
+      "button text": ["Buy 1 food (20 gold)", "Buy weapon (50 gold)", "Go to town square"],
       "button functions": [buyFood, buyWeapon, goTown],
       text: "You enter the store."
     },
@@ -66,7 +68,13 @@ const locations = [
       name: "songsang",
       "button text": ["Play again", "play again", "Go to town square"],
       "button functions": [oddJob, oddJob , goTown],
-      text: "There once was a ship that put to sea \n The name of the ship was Billy O' Tea... \n The winds blew up her bown dipped down \n oh blow my bully boys blowwwwww \n \n Soon may the Willerman come \n To bring us sugar and tea and rum... \n One day when the tonguing is done \n We'll take our leave and goooo \n \n You've been tipped by nearby listeners, \n \n +3 GOLD"
+      text:  ' "There once was a ship that put to sea \n The name of the ship was Billy O` Tea... \n The winds blew up her bown dipped down \n oh blow my bully boys blowwwwww \n \n Soon may the Willerman come \n To bring us sugar and tea and rum... \n One day when the tonguing is done \n We`ll take our leave and goooo!!" \n \n You`ve been tipped by nearby listeners, \n \n +3 GOLD '
+    },
+    {
+      name: "fighting",
+      "button text": ["Attack", "Eat food", "Run"],
+      "button functions": [attack, eatFood, goTown],
+      text:  "You are fighting a MONSTER! \n \n IT IS KILL OR BE KILLED... or run."
     }
   ];
 
@@ -99,7 +107,7 @@ const locations = [
       name: "5",
       "button text": ["Gas", "Earth", "Arrows"],
       "button functions": [right, wrong, wrong],
-      text: "In the original Castle Crashers game, which player gets to kiss the princess at the end of a boss fight?"
+      text: "In the original Castle Crashers game, what was the magic power posessed by the 'green' knight?"
     }
   ];
 
@@ -131,9 +139,9 @@ function goCave() {
   update(locations[2]);
 }
 
-//paceholder functions
 function fightSlime(){
-  console.log("hello");
+  fighting = 1;
+  goFight();
 }
 function fightDragon(){
   console.log("hello");
@@ -144,13 +152,13 @@ console.logO("hello");
 
 function buyFood(){
 
-  if (food < 5 && gold >= 10) {
+  if (food < 5 && gold >= 20) {
   food += 1;
-  gold -= 10;
+  gold -= 20;
   goldText.innerText = gold;
   foodText.innerText = food;
   }
-  else if (gold < 10) {
+  else if (gold < 20) {
   text.innerText = "You don't have enough gold! Better get a job..."
   }
   else if(food = 5) {
@@ -189,7 +197,22 @@ else if(food >= 1 && health <= 30 && health > 0) {
 }
 
 function buyWeapon(){
-  console.log("hello");
+  if (currentWeapon < weapons.length - 1) {
+    if(gold >= 50){
+      currentWeapon++;
+      gold -= 50;
+      let newWeapon = weapons[currentWeapon].name;
+      goldText.innerText = gold;
+      weaponText.innerText = newWeapon;
+      text.innerText = "You now have a " + newWeapon + "!"
+
+
+    } else {
+      text.innerText = "No discouts!!! This weapon is to expensive for you."
+    }
+  } else {
+    text.innerText = "You already have the most powerful weapon.. THE DRAGON SWORD!"
+  }
 }
 
 function fightBeast(){
@@ -197,7 +220,7 @@ function fightBeast(){
 }
 
 function oddJob() {
-  update(trivia[(Math.floor(Math.random()*5)) - 1])
+  update(trivia[(Math.floor(Math.random()*5))])
 }
 
 function wrong() {
@@ -228,6 +251,16 @@ function singSong() {
   update(locations[6]);
   gold += 3;
   goldText.innerText = gold;
+}
+function goFight() {
+  update(locations[7]);
+  monsterHealth = monsters[fighting].health;
+  monsterStats.style.display = "block";
+  monsterName.innerText = monsters[fighting].name;
+  monsterHealthText.innerText = monsterHealth;
+}
+function attack () {
+  console.loog("attack");
 }
 
 //need to fix random number selector, I think it would be better to just have a list of questions instead, this way we could guarentee that no answers will be repeated, once you get through all the questions you are done, and we can provide an answer key
