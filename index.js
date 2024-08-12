@@ -29,7 +29,7 @@ const locations = [
     {
       name: "town square",
       "button text": ["Go to store", "Go to cave", "Go to odd job"],
-      "button functions": [goStore, goCave, goTown],
+      "button functions": [goStore, goCave, oddJob],
       text: "You are in the town square. You see a sign that says \"Store\"."
     },
     {
@@ -43,7 +43,40 @@ const locations = [
       "button text": ["Fight slime", "Fight fanged beast", "Go to town square"],
       "button functions": [fightSlime, fightBeast, goTown],
       text: "You enter the cave. You see some monsters."
-    }
+    },
+  ];
+
+  const trivia = [
+    {
+      name: "1",
+      "button text": ["Health", "Strength", "Agality"],
+      "button functions": [wrong, right, wrong],
+      text: "In the original Castle Crasher's game, what does the 'muscle arm' stat represent?"
+    },
+    {
+      name: "2",
+      "button text": ["Boss killer", "Highest level", "Free for all winner"],
+      "button functions": [wrong, wrong, right],
+      text: "In the original Castle Crasher's game, which player gets to kiss the princess at the end of a boss fight?"
+    },
+    {
+      name: "3",
+      "button text": ["42", "chocolate", "idk"],
+      "button functions": [right, wrong, wrong],
+      text: "What is the answer to the universe?"
+    },
+    {
+      name: "4",
+      "button text": ["Arrows", "Fire", "Lightning"],
+      "button functions": [wrong, right, wrong],
+      text: "In the original Castle Crasher's game, what was the magic power posessed by the 'red' knight?"
+    },
+    {
+      name: "5",
+      "button text": ["Gas", "Earth", "Arrows"],
+      "button functions": [right, wrong, wrong],
+      text: "In the original Castle Crasher's game, which player gets to kiss the princess at the end of a boss fight?"
+    },
   ];
 
 
@@ -138,3 +171,11 @@ function buyWeapon(){
 function fightBeast(){
   console.log("hello");
 }
+
+function oddJob() {
+  update(trivia[(Math.floor(Math.random()*5)) - 1])
+}
+
+function wrong() {}
+
+function right() {}
