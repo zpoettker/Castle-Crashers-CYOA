@@ -1,4 +1,4 @@
-let food = 2;
+let food = 1;
 let health = 100;
 let gold = 50;
 let currentWeaponIndex = 0;
@@ -87,7 +87,7 @@ console.logO("hello");
 
 function buyFood(){
 
-  if (food < 10 && gold >= 10) {
+  if (food < 5 && gold >= 10) {
   food += 1;
   gold -= 10;
   goldText.innerText = gold;
@@ -96,7 +96,7 @@ function buyFood(){
   else if (gold < 10) {
   text.innerText = "You don't have enough gold! Better get a job..."
   }
-  else if(food = 10) {
+  else if(food = 5) {
     text.innerText = "Leave some food for the rest of us!"
   }
 else {console.log("error")};
