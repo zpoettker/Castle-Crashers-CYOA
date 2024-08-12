@@ -48,13 +48,25 @@ const locations = [
       name: "jobwrong",
       "button text": ["Play again", "Burn down job", "Go to town square"],
       "button functions": [oddJob, burnJob, goTown],
-      text: "Your answer was incorrect.. I hope your better at fighting monsters.. \n \n"
+      text: "Your answer was incorrect.. I hope you're better at fighting monsters.. \n \n"
     },
     {
       name: "jobright",
       "button text": ["Play again", "Buy a beer", "Go to town square"],
       "button functions": [oddJob, buyBeer , goTown],
       text: "That's right! You aren't cheating are you?\n \n"
+    },
+    {
+      name: "beerbought",
+      "button text": ["Play again", "sing a song", "Go to town square"],
+      "button functions": [oddJob, singSong , goTown],
+      text: "you bought a celebration beer, then that beer bought a beer \n \n -2 GOLD"
+    },
+    {
+      name: "songsang",
+      "button text": ["Play again", "play again", "Go to town square"],
+      "button functions": [oddJob, oddJob , goTown],
+      text: "There once was a ship that put to sea \n The name of the ship was Billy O' Tea... \n The winds blew up her bown dipped down \n oh blow my bully boys blowwwwww \n \n Soon may the Willerman come \n To bring us sugar and tea and rum... \n One day when the tonguing is done \n We'll take our leave and goooo \n \n You've been tipped by nearby listeners, \n \n +3 GOLD"
     }
   ];
 
@@ -63,13 +75,13 @@ const locations = [
       name: "1",
       "button text": ["Health", "Strength", "Agality"],
       "button functions": [wrong, right, wrong],
-      text: "In the original Castle Crasher's game, what does the 'muscle arm' stat represent?"
+      text: "In the original Castle Crashers game, what does the 'muscle arm' stat represent?"
     },
     {
       name: "2",
-      "button text": ["Boss killer", "Highest level", "Free for all winner"],
+      "button text": ["Boss killer", "Highest level", "Free-for-all winner"],
       "button functions": [wrong, wrong, right],
-      text: "In the original Castle Crasher's game, which player gets to kiss the princess at the end of a boss fight?"
+      text: "In the original Castle Crashers game, which player gets to kiss the princess at the end of a boss fight?"
     },
     {
       name: "3",
@@ -81,14 +93,14 @@ const locations = [
       name: "4",
       "button text": ["Arrows", "Fire", "Lightning"],
       "button functions": [wrong, wrong, right],
-      text: "In the original Castle Crasher's game, what was the magic power posessed by the 'red' knight?"
+      text: "In the original Castle Crashers game, what was the magic power posessed by the 'red' knight?"
     },
     {
       name: "5",
       "button text": ["Gas", "Earth", "Arrows"],
       "button functions": [right, wrong, wrong],
-      text: "In the original Castle Crasher's game, which player gets to kiss the princess at the end of a boss fight?"
-    },
+      text: "In the original Castle Crashers game, which player gets to kiss the princess at the end of a boss fight?"
+    }
   ];
 
 
@@ -207,7 +219,15 @@ function burnJob() {
 }
 
 function buyBeer() {
-  console.log("you bought a beer then that beer bought a beer");
+  update(locations[5]);
+  gold -= 2;
+  goldText.innerText = gold;
+}
+
+function singSong() {
+  update(locations[6]);
+  gold += 3;
+  goldText.innerText = gold;
 }
 
 //need to fix random number selector, I think it would be better to just have a list of questions instead, this way we could guarentee that no answers will be repeated, once you get through all the questions you are done, and we can provide an answer key
