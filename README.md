@@ -12,3 +12,11 @@ I may add a training level or 'odd job' level to earn coins without fighting bos
 I would like to add some skill, and randomness to the game to allow for different playing experiences.
 
 I would also like to add different paths or 'short cuts' to change how the game works.
+
+TODO: 
+
+-Work out new system for levels
+
+-work out roadmap for levels
+
+-Fix 'random trivia' to a sequence of questions in a row
