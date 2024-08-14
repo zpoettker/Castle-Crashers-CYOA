@@ -2,7 +2,7 @@ let food = 1;
 let health = 100;
 let gold = 50;
 let currentWeapon = 0;
-let fighting;
+let fighting = 0;
 let monsterHealth;
 let inventory = ["stick"];
 
@@ -30,8 +30,8 @@ const weapons = [
 const locations = [
     {
       name: "town square",
-      "button text": ["Go to store", "Go to cave", "Go to odd job"],
-      "button functions": [goStore, goCave, oddJob],
+      "button text": ["Go to store", "Fight", "Go to odd job"],
+      "button functions": [goStore, goFight, oddJob],
       text: "You are in the town square. You see a sign that says \"Store\"."
     },
     {
@@ -75,7 +75,13 @@ const locations = [
       "button text": ["Attack", "Eat food", "Run"],
       "button functions": [attack, eatFood, goTown],
       text:  "You are fighting a MONSTER! \n \n IT IS KILL OR BE KILLED... or run."
-    }
+    },
+    {
+      name: "kill monster",
+      "button text": ["Go to town square", "Go to town square", "Go to town square"],
+      "button functions": [goTown, goTown, goTown],
+      text: 'You defeated the monster and beat level ' + fighting + '! \n \n You found some gold aswell'
+    },
   ];
 
   const trivia = [
@@ -111,10 +117,28 @@ const locations = [
     }
   ];
 
+  const monsters = [
+    {
+      name: "slime",
+      level: 2,
+      health: 15
+    },
+    {
+      name: "fanged beast",
+      level: 8,
+      health: 60
+    },
+    {
+      name: "dragon",
+      level: 20,
+      health: 300
+    }
+  ]
+
 
   // initialize buttons
 button1.onclick = goStore;
-button2.onclick = goCave;
+button2.onclick = goFight;
 button3.onclick = oddJob;
 
  function update(location){
@@ -259,8 +283,42 @@ function goFight() {
   monsterName.innerText = monsters[fighting].name;
   monsterHealthText.innerText = monsterHealth;
 }
-function attack () {
-  console.loog("attack");
+function attack() {
+  text.innerText = "The " + monsters[fighting].name + " attacks.";
+  text.innerText += " You attack it with your " + weapons[currentWeapon].name + ".";
+  health -= getMonsterAttackValue(monsters[fighting].level);
+  if (isMonsterHit()) {
+    monsterHealth -= weapons[currentWeapon].power + Math.floor(Math.random() * xp) + 1;    
+  } else {
+    text.innerText += " You miss.";
+  }
+  healthText.innerText = health;
+  monsterHealthText.innerText = monsterHealth;
+  if (health <= 0) {
+    lose();
+  } else if (monsterHealth <= 0) {
+      defeatMonster();
+  }
+  if (Math.random() <= .1 && inventory.length !== 1) {
+    text.innerText += " Your " + inventory.pop() + " breaks.";
+    currentWeapon--;
+  }
+}
+
+function defeatMonster(){
+
+  if(fighting < 5){
+gold += Math.floor(monsters[fighting].level * 6.7);
+fighting++;
+goldText.innerText = gold;
+update(locations[8]);
+} else {
+  winGame()
+}
+}
+
+function winGame(){
+  console.log("You win!");
 }
 
 //need to fix random number selector, I think it would be better to just have a list of questions instead, this way we could guarentee that no answers will be repeated, once you get through all the questions you are done, and we can provide an answer key
