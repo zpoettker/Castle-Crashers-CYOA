@@ -5,6 +5,7 @@ let currentWeapon = 0;
 let fighting = 0;
 let monsterHealth;
 let inventory = ["stick"];
+let triviaQuestion = 0;
 
 const button1 = document.querySelector("#button1");
 const button2 = document.querySelector("#button2");
@@ -33,6 +34,24 @@ const weapons = [
     {name: 'Sledge Hammer', power: 35},
     {name: 'Light Saber', power: 50},
     {name: 'Dragon Sword', power: 100}
+]
+
+const monsters = [
+  {
+    name: "Slime",
+    level: 3,
+    health: 15
+  },
+  {
+    name: "Giant Cat",
+    level: 5,
+    health: 60
+  },
+  {
+    name: "Dragon",
+    level: 10,
+    health: 300
+  }
 ]
 
 const locations = [
@@ -88,7 +107,7 @@ const locations = [
       name: "kill monster",
       "button text": ["Go to town square", "Go to town square", "Go to town square"],
       "button functions": [goTown, goTown, goTown],
-      text: 'You defeated the monster and beat level ' + (fighting + 1) + '! \n \n You found some gold aswell'
+      text: "You defeated the " + monsters[fighting].name + "! \n \nYou found some gold aswell."
     },
     {
       name: "lose",
@@ -100,54 +119,83 @@ const locations = [
 
   const trivia = [
     {
-      name: "1",
-      "button text": ["Health", "Strength", "Agality"],
+      name: "0",
+      "button text": ["Health", "Strength", "Agility"],
       "button functions": [wrong, right, wrong],
-      text: "In the original Castle Crashers game, what does the 'muscle arm' stat represent?"
+      text: "In the original Castle Crashers game, what does the 'muscle arm' stat represent?",
+      answer: "'Stength'"
+    },
+    {
+      name: "1",
+      "button text": ["Boss killer", "Highest level", "Free-for-all winner"],
+      "button functions": [wrong, wrong, right],
+      text: "In the original Castle Crashers game, which player gets to kiss the princess at the end of a boss fight?",
+      answer: "'The free-for-all winner'"
     },
     {
       name: "2",
-      "button text": ["Boss killer", "Highest level", "Free-for-all winner"],
-      "button functions": [wrong, wrong, right],
-      text: "In the original Castle Crashers game, which player gets to kiss the princess at the end of a boss fight?"
+      "button text": ["42", "chocolate", "idk"],
+      "button functions": [right, wrong, wrong],
+      text: "What is the answer to the universe?",
+      answer: "'42'"
     },
     {
       name: "3",
-      "button text": ["42", "chocolate", "idk"],
-      "button functions": [right, wrong, wrong],
-      text: "What is the answer to the universe?"
+      "button text": ["Arrows", "Fire", "Lightning"],
+      "button functions": [wrong, wrong, right],
+      text: "In the original Castle Crashers game, what was the magic power posessed by the 'red' knight?",
+      answer: "'Lightning'"
     },
     {
       name: "4",
-      "button text": ["Arrows", "Fire", "Lightning"],
-      "button functions": [wrong, wrong, right],
-      text: "In the original Castle Crashers game, what was the magic power posessed by the 'red' knight?"
+      "button text": ["Gas", "Earth", "Arrows"],
+      "button functions": [right, wrong, wrong],
+      text: "In the original Castle Crashers game, what was the magic power posessed by the 'green' knight?",
+      answer: "'Gas'"
     },
     {
       name: "5",
-      "button text": ["Gas", "Earth", "Arrows"],
+      "button text": ["Mammal", "Amphibian", "Reptile"],
       "button functions": [right, wrong, wrong],
-      text: "In the original Castle Crashers game, what was the magic power posessed by the 'green' knight?"
+      text: "What classification is a platypus?",
+      answer: "'Mammal'"
+    },
+    {
+      name: "6",
+      "button text": ["Poop", "Cry", "Sweat"],
+      "button functions": [right, wrong, right],
+      text: "In the original Castle Crashers game, what did the bear do when it was scared of the Giant Cat?",
+      answer: "'Poop or Sweat'"
+    },
+    {
+      name: "7",
+      "button text": ["Air", "Lightning", "Arrows"],
+      "button functions": [wrong, wrong, right],
+      text: "In the original Castle Crashers game, what was the magic power posessed by the 'grey' knight?",
+      answer: "'Arrows'"
+    },
+    {
+      name: "8",
+      "button text": ["0", "1", "1/6295151"],
+      "button functions": [wrong, right, wrong],
+      text: "What is 6295151^0?",
+      answer: "'1'"
+    },
+    {
+      name: "9",
+      "button text": ["Handsome", "Smart", "Kind"],
+      "button functions": [right, right, right],
+      text: "What attribute is a good fit to describe Zach?",
+      answer: "'Any'"
+    },
+    {
+      name: "10",
+      "button text": ["100", "55", "99"],
+      "button functions": [wrong, wrong, right],
+      text: "In the original Castle Crashers game, what was the max level you could upgrade your character to?",
+      answer: "'99'"
     }
   ];
-
-  const monsters = [
-    {
-      name: "Slime",
-      level: 3,
-      health: 15
-    },
-    {
-      name: "Giant Cat",
-      level: 5,
-      health: 60
-    },
-    {
-      name: "Dragon",
-      level: 10,
-      health: 300
-    }
-  ]
 
 const attackTexts = [
   "\n \nYou attack it with your " + weapons[currentWeapon].name + ".", 
@@ -184,9 +232,11 @@ function fightSlime(){
   fighting = 1;
   goFight();
 }
+
 function fightDragon(){
   console.log("hello");
 }
+
 function buyHealth(){
 console.logO("hello");
 }
@@ -208,14 +258,12 @@ function buyFood(){
 else {console.log("error")};
 }
 
-
 function updateFood(hea){
   health += hea;
   food -= 1;
   healthText.innerText = health;
   foodText.innerText = food;
 }
-
 
 function eatFood(){
   if (food >= 1 && health <= 99 && health > 74) {
@@ -230,8 +278,11 @@ else if(food >= 1 && health <= 74 && health > 50) {
 else if(food >= 1 && health <= 50 && health > 30) {
   updateFood(35)
 }
-else if(food >= 1 && health <= 30 && health > 0) {
+else if(food >= 1 && health <= 30 && health > 15) {
   updateFood(50)
+}
+else if(food >= 1 && health <= 15 && health > 0) {
+  updateFood(65)
 }
 
 
@@ -261,14 +312,16 @@ function fightBeast(){
 }
 
 function oddJob() {
-  update(trivia[(Math.floor(Math.random()*5))])
+  update(trivia[triviaQuestion]);
 }
 
 function wrong() {
   update(locations[3]);
   gold--;
   goldText.innerText = gold;
-  text.innerText += "-1 GOLD";
+  text.innerText += "The correct answer was " + trivia[triviaQuestion].answer + ".";
+  text.innerText += "\n \n-1 GOLD";
+  triviaQuestion++;
 }
 
 function right() {
@@ -276,6 +329,7 @@ function right() {
   gold += 5;
   goldText.innerText = gold;
   text.innerText += "+5 GOLD";
+  triviaQuestion++;
 }
 
 function burnJob() {
@@ -304,7 +358,6 @@ function goFight() {
 function attack() {
   text.innerText = "The " + monsters[fighting].name + " attacks.";
   let generator = Math.floor(Math.random() * 5)
-  console.log(generator);
   text.innerText += attackTexts[generator];
   health -=  ((monsters[fighting].level) * Math.floor(Math.random() * 3 + 1));
   monsterHealth -= weapons[currentWeapon].power + Math.floor(Math.random()) + 1;    
@@ -314,20 +367,22 @@ function attack() {
     lose();
   } else if (monsterHealth <= 0) {
       defeatMonster();
-  } else{console.log("no bugs here")}
   if (Math.random() <= .1 && inventory.length !== 1) {
     text.innerText += " Your " + inventory.pop() + " breaks.";
     currentWeapon--;
   }
 }
-
+}
 function defeatMonster(){
 
   if(fighting < 5){
-gold += Math.floor(monsters[fighting].level * 6.7);
+    let goldNumber = Math.floor(monsters[fighting].level * 6.7)
+gold += goldNumber;
 fighting++;
 goldText.innerText = gold;
 update(locations[8]);
+monsterHealthText.innerText = "DEAD"
+text.innerText += "\n \n+" + goldNumber + " GOLD"
 } else {
   winGame()
 }
@@ -339,6 +394,7 @@ function winGame(){
 
 function lose(){
 update(locations[9]);
+healthText.innerText = "DEAD";
 }
 
 function restart(){
