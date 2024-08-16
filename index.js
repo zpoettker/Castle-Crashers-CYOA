@@ -12,13 +12,20 @@ const button3 = document.querySelector("#button3");
 
 const text = document.querySelector(".text");
 const foodText = document.querySelector("#foodText");
-const healthText = document.querySelector(".healthText");
+const healthText = document.querySelector("#healthText");
 const goldText = document.querySelector("#goldText");
 const weaponText = document.querySelector("#weaponText");
-const monsterStats = document.querySelector(".monsterStats");
-const monsterName = document.querySelector(".monsterName");
-const monsterHealthText = document.querySelector(".monsterHealth");
+const monsterStats = document.querySelector("#monsterStats");
+const monsterName = document.querySelector("#monsterName");
+const monsterHealthText = document.querySelector("#monsterHealth");
 
+  // initialize buttons
+  button1.onclick = goStore;
+  button2.onclick = goFight;
+  button3.onclick = oddJob;
+
+
+  //Arrays
 const weapons = [
     {name: 'Stick', power: 10},
     {name: 'Sharp Fish', power: 25},
@@ -135,12 +142,6 @@ const locations = [
     }
   ]
 
-
-  // initialize buttons
-button1.onclick = goStore;
-button2.onclick = goFight;
-button3.onclick = oddJob;
-
  function update(location){
   button1.innerText = location["button text"][0];
   button2.innerText = location["button text"][1];
@@ -153,6 +154,7 @@ button3.onclick = oddJob;
 
  function goTown() {
   update(locations[0]);
+  monsterStats.style.display = "none";
 }
 
 function goStore() {

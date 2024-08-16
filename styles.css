@@ -51,10 +51,10 @@ button:hover {
     margin-left: 20px;
 }
 
-.bossHealth {
+#monsterStats {
     display: none;
-    border: 1px solid #0a0a23;
+    border: 2px solid #0a0a23;
     padding: 5px;
     color: #ffffff;
     background-color: #c70d0d;
-  }
+}
