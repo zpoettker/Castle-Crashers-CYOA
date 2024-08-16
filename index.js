@@ -1,10 +1,10 @@
 let food = 1;
 let health = 100;
-let gold = 1000;
+let gold = 50;
 let currentWeapon = 1;
 let fighting = 0;
 let monsterHealth;
-let inventory = ["stick"];
+let inventory = [,"Bare Hands", "stick"];
 let triviaQuestion = 0;
 
 const button1 = document.querySelector("#button1");
@@ -29,24 +29,24 @@ const monsterHealthText = document.querySelector("#monsterHealth");
 
   //Arrays
 const weapons = [
-    {name: 'Bare Hands', power: 2},
-    {name: 'Stick', power: 10},
-    {name: 'Sharp Fish', power: 25},
-    {name: 'Sledge Hammer', power: 35},
-    {name: 'Light Saber', power: 50},
-    {name: 'Dragon Sword', power: 100}
+    {name: 'Bare Hands', power: 1},
+    {name: 'Stick', power: 4},
+    {name: 'Sharp Fish', power: 8},
+    {name: 'Sledge Hammer', power: 12},
+    {name: 'Light Saber', power: 16},
+    {name: 'Dragon Sword', power: 25}
 ]
 
 const monsters = [
   {
     name: "Slime",
     level: 3,
-    health: 15
+    health: 30
   },
   {
     name: "Giant Cat",
     level: 5,
-    health: 60
+    health: 75
   },
   {
     name: "Dragon",
@@ -216,13 +216,13 @@ const locations = [
     }
   ];
 
-const attackTexts = [
-  "\n \nYou attack it with your " + weapons[currentWeapon].name + ".", 
-  "\n \nYour " + weapons[currentWeapon].name + " slashes the monster's face!", 
-  "\n \nBOOM! BOW!", 
-  "\n \nYou are glad you have your trusty " + weapons[currentWeapon].name + " as you attack the monster.",
-  "\n \nYou lung at the " + monsters[fighting].name + " with your " + weapons[currentWeapon].name + "!"
-]
+  const attackTexts = [
+    "\n \nYou attack it with your " + weapons[currentWeapon].name + ".", 
+    "\n \nYour " + weapons[currentWeapon].name + " slashes the monster's face!", 
+    "\n \nBOOM! BOW!", 
+    "\n \nYou are glad you have your trusty " + weapons[currentWeapon].name + " as you attack the monster.",
+    "\n \nYou lung at the " + monsters[fighting].name + " with your " + weapons[currentWeapon].name + "!"
+  ]
 
  function update(location){
   button1.innerText = location["button text"][0];
@@ -325,11 +325,18 @@ function oddJob() {
 
 function wrong() {
   update(locations[3]);
+
+if(gold > 0){
   gold--;
   goldText.innerText = gold;
   text.innerText += "The correct answer was " + trivia[triviaQuestion].answer + ".";
   text.innerText += "\n \n-1 GOLD";
-  triviaQuestion++;
+  
+} else {
+console.log("0 gold")
+text.innerText += "The correct answer was " + trivia[triviaQuestion].answer + ".";
+}
+triviaQuestion++;
 }
 
 function right() {
@@ -389,10 +396,14 @@ function attack() {
   text.innerText = "The " + monsters[fighting].name + " attacks.";
   let generator = Math.floor(Math.random() * 5)
   text.innerText += attackTexts[generator];
-  health -=  ((monsters[fighting].level) * Math.floor(Math.random() * 3 + 1));
-  monsterHealth -= weapons[currentWeapon].power + Math.floor(Math.random()) + 1;    
+  let monsterAttack = ((monsters[fighting].level) * Math.floor(Math.random() * 3 + 1));
+  let playerAttack = ((weapons[currentWeapon].power) * Math.floor(Math.random() * 3 + 1));
+  health -= monsterAttack;
+  monsterHealth -= playerAttack;    
   healthText.innerText = health;
   monsterHealthText.innerText = monsterHealth;
+  text.innerText += "\n \n+" + playerAttack + " ATTACK";
+  text.innerText += " -" + monsterAttack + " HEALTH";
   if (health <= 0) {
     lose();
   } else if (monsterHealth <= 0) {
