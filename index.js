@@ -126,17 +126,17 @@ const locations = [
 
   const monsters = [
     {
-      name: "slime",
+      name: "Slime",
       level: 2,
       health: 15
     },
     {
-      name: "fanged beast",
+      name: "Giant Cat",
       level: 8,
       health: 60
     },
     {
-      name: "dragon",
+      name: "Dragon",
       level: 20,
       health: 300
     }
@@ -288,12 +288,8 @@ function goFight() {
 function attack() {
   text.innerText = "The " + monsters[fighting].name + " attacks.";
   text.innerText += " You attack it with your " + weapons[currentWeapon].name + ".";
-  health -= getMonsterAttackValue(monsters[fighting].level);
-  if (isMonsterHit()) {
-    monsterHealth -= weapons[currentWeapon].power + Math.floor(Math.random() * xp) + 1;    
-  } else {
-    text.innerText += " You miss.";
-  }
+  health -=  ((monsters[fighting].level));;
+  monsterHealth -= weapons[currentWeapon].power + Math.floor(Math.random()) + 1;    
   healthText.innerText = health;
   monsterHealthText.innerText = monsterHealth;
   if (health <= 0) {
@@ -321,6 +317,10 @@ update(locations[8]);
 
 function winGame(){
   console.log("You win!");
+}
+
+function lose(){
+
 }
 
 //need to fix random number selector, I think it would be better to just have a list of questions instead, this way we could guarentee that no answers will be repeated, once you get through all the questions you are done, and we can provide an answer key
