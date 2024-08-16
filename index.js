@@ -1,7 +1,7 @@
 let food = 1;
 let health = 100;
-let gold = 50;
-let currentWeapon = 0;
+let gold = 1000;
+let currentWeapon = 1;
 let fighting = 0;
 let monsterHealth;
 let inventory = ["stick"];
@@ -29,6 +29,7 @@ const monsterHealthText = document.querySelector("#monsterHealth");
 
   //Arrays
 const weapons = [
+    {name: 'Bare Hands', power: 2},
     {name: 'Stick', power: 10},
     {name: 'Sharp Fish', power: 25},
     {name: 'Sledge Hammer', power: 35},
@@ -68,10 +69,10 @@ const locations = [
       text: "You enter the store."
     },
     {
-      name: "cave",
-      "button text": ["Fight slime", "Fight fanged beast", "Go to town square"],
-      "button functions": [fightSlime, fightBeast, goTown],
-      text: "You enter the cave. You see some monsters."
+      name: "burned",
+      "button text": ["Go to town square", "Go to town square", "Go to town square"],
+      "button functions": [goTown, goTown, goTown],
+      text: "You burn the small business to the ground.\n \nNo one was hurt, but you were placed at the scene of the crime by a witness. You've been booked, fined, and spend the next year in jail. \n \nOnce you've been released, you shed a manly tear at the sight of society, you are hit with a revelation of how beautiful and precious life is. You question why you decided to burn down your work site in the first place. You now remember that before you did hard time you were on a quest to save some princess or something and decide to dedicate the rest of your life to that."
     },
     {
       name: "jobwrong",
@@ -114,7 +115,25 @@ const locations = [
       "button text": ["REPLAY?", "REPLAY?", "REPLAY?"],
       "button functions": [restart, restart, restart],
       text: "You died. \n \n GAME OVER"
-    }
+    },
+    {
+      name: "sure",
+      "button text": ["Play Again", "Yes I'm sure", "Go to town square"],
+      "button functions": [oddJob, imSure, goTown],
+      text: "You're about to commit arson, are you sure you want to do that?"
+    },
+    {
+      name: "sure sure",
+      "button text": ["Play Again", "I'm sure I'm sure", "Go to town square"],
+      "button functions": [oddJob, imSureSure, goTown],
+      text: "Are you sure you're sure?"
+    }, 
+    {
+      name: "sure sure",
+      "button text": ["Play Again", "Burn it to the ground", "Go to town square"],
+      "button functions": [oddJob, burn, goTown],
+      text: "C'mon man it's just a game, people could get hurt!"
+    },
   ];
 
   const trivia = [
@@ -224,19 +243,6 @@ function goStore() {
   update(locations[1]);
 }
 
-function goCave() {
-  update(locations[2]);
-}
-
-function fightSlime(){
-  fighting = 1;
-  goFight();
-}
-
-function fightDragon(){
-  console.log("hello");
-}
-
 function buyHealth(){
 console.logO("hello");
 }
@@ -300,19 +306,21 @@ function buyWeapon(){
 
 
     } else {
-      text.innerText = "No discouts!!! This weapon is to expensive for you."
+      text.innerText = "No discounts!!! This weapon is to expensive for you.."
     }
   } else {
     text.innerText = "You already have the most powerful weapon.. THE DRAGON SWORD!"
   }
 }
 
-function fightBeast(){
-  console.log("hello");
-}
-
 function oddJob() {
+  if(triviaQuestion < 10)
+    {
   update(trivia[triviaQuestion]);
+    }
+    else {
+      text.innerText = "We ran out of work for you, sorry."
+    }
 }
 
 function wrong() {
@@ -333,7 +341,29 @@ function right() {
 }
 
 function burnJob() {
-  console.log("burn down the place");
+  update(locations[10]);
+}
+
+function imSure(){
+update(locations[11]);
+}
+
+function imSureSure(){
+update(locations[12]);
+}
+
+function burn(){
+update(locations[2]);
+health = 100;
+food = 5;
+gold = 0;
+currentWeapon = 0;
+healthText.innerText = health;
+foodText.innerText = food;
+goldText.innerText = gold;
+let newWeapon = weapons[currentWeapon].name;
+weaponText.innerText = newWeapon;
+
 }
 
 function buyBeer() {
