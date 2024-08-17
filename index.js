@@ -2,9 +2,9 @@ let food = 1;
 let health = 100;
 let gold = 50;
 let currentWeapon = 1;
-let fighting = 0;
+var fighting = 0;
 let monsterHealth;
-let inventory = [,"Bare Hands", "stick"];
+let inventory = [,"Bare Hands", "Stick"];
 let triviaQuestion = 0;
 
 const button1 = document.querySelector("#button1");
@@ -419,11 +419,12 @@ function defeatMonster(){
   if(fighting < 5){
     let goldNumber = Math.floor(monsters[fighting].level * 6.7)
 gold += goldNumber;
-fighting++;
+console.log(fighting);
 goldText.innerText = gold;
 update(locations[8]);
 monsterHealthText.innerText = "DEAD"
 text.innerText += "\n \n+" + goldNumber + " GOLD"
+fighting++;
 } else {
   winGame()
 }
@@ -441,10 +442,13 @@ healthText.innerText = "DEAD";
 function restart(){
     health = 100;
     gold = 50;
-    currentWeapon = 0;
-    inventory = ["stick"];
+    currentWeapon = 1;
+    inventory = ["Bare Hands", "Stick"];
+    fighting = 0;
+    triviaQuestion = 0;
     goldText.innerText = gold;
     healthText.innerText = health;
+    weaponText.innerText = weapons[currentWeapon].name;
     goTown();
 }
 
