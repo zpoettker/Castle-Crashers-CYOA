@@ -2,7 +2,7 @@ let food = 1;
 let health = 100;
 let gold = 50;
 let currentWeapon = 1;
-var fighting = 0;
+let fighting = 0;
 let monsterHealth;
 let inventory = [,"Bare Hands", "Stick"];
 let triviaQuestion = 0;
