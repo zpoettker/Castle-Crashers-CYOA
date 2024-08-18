@@ -217,12 +217,21 @@ const locations = [
   ];
 
   const attackTexts = [
-    "\n \nYou attack it with your " + weapons[currentWeapon].name + ".", 
-    "\n \nYour " + weapons[currentWeapon].name + " slashes the monster's face!", 
-    "\n \nBOOM! BOW!", 
-    "\n \nYou are glad you have your trusty " + weapons[currentWeapon].name + " as you attack the monster.",
-    "\n \nYou lung at the " + monsters[fighting].name + " with your " + weapons[currentWeapon].name + "!"
+    {front: "\n \nYou attack it with your ", 
+    back: "."},
+
+    {front: "\n \nYour ",
+      back: " slashes the monster's face!"
+    },
+
+    {front: "\n \nYou are glad you have your trusty ",
+      back: " as you attack the monster."
+    },
+    {front: "\n \nYou lung at the monster with your ",
+      back: "!"
+    }
   ]
+  
 
  function update(location){
   button1.innerText = location["button text"][0];
@@ -395,8 +404,15 @@ function goFight() {
 function attack() {
   text.innerText = "The " + monsters[fighting].name + " attacks.";
   let generator = Math.floor(Math.random() * 5)
-  text.innerText += attackTexts[generator];
-  let monsterAttack = ((monsters[fighting].level) * Math.floor(Math.random() * 3 + 1));
+  if(generator < 5){
+  text.innerText += attackTexts[generator].front;
+  text.innerText += weapons[currentWeapon].name;
+  text.innerText += attackTexts[generator].back;
+  }
+  else if(generator === 5){
+    text.innerText += "BOOM! BOW!"
+  }
+  let monsterAttack = ((monsters[currentWeapon].level) * Math.floor(Math.random() * 3 + 1));
   let playerAttack = ((weapons[currentWeapon].power) * Math.floor(Math.random() * 3 + 1));
   health -= monsterAttack;
   monsterHealth -= playerAttack;    
@@ -408,10 +424,6 @@ function attack() {
     lose();
   } else if (monsterHealth <= 0) {
       defeatMonster();
-  if (Math.random() <= .1 && inventory.length !== 1) {
-    text.innerText += " Your " + inventory.pop() + " breaks.";
-    currentWeapon--;
-  }
 }
 }
 function defeatMonster(){
