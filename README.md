@@ -15,7 +15,6 @@ I would also like to add different paths or 'short cuts' to change how the game 
 
 TODO: 
 
--Work out new system for levels
 
 -work out roadmap for levels
 
