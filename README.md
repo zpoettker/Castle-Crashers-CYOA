@@ -19,3 +19,5 @@ TODO:
 -work out roadmap for levels
 
 -Fix 'random trivia' to a sequence of questions in a row
+
+Need to fix array and object bug with text
