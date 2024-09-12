@@ -72,7 +72,7 @@ const locations = [
       name: "burned",
       "button text": ["Go to town square", "Go to town square", "Go to town square"],
       "button functions": [goTown, goTown, goTown],
-      text: "You burn the small business to the ground.\n \nNo one was hurt, but you were placed at the scene of the crime by a witness. You've been booked, fined, and spend the next year in jail. \n \nOnce you've been released, you shed a manly tear at the sight of society, you are hit with a revelation of how beautiful and precious life is. You question why you decided to burn down your work site in the first place. You now remember that before you did hard time you were on a quest to save some princess or something and decide to dedicate the rest of your life to that."
+      text: "You burn the small business to the ground.\n \nNo one was hurt, but you were placed at the scene of the crime by a witness. You've been booked, fined, and spend the next year in jail. \n \nOnce you've been released, you shed a manly tear at the sight of society, you are hit with a revelation of how beautiful and precious life is. You question why you decided to burn down your work site in the first place. You now remember that before you did hard time you were on a quest to save the princess and decide to dedicate the rest of your life to that."
     },
     {
       name: "jobwrong",
@@ -181,9 +181,9 @@ const locations = [
     },
     {
       name: "6",
-      "button text": ["Poop", "Cry", "Sweat"],
-      "button functions": [right, wrong, right],
-      text: "In the original Castle Crashers game, what did the bear do when it was scared of the Giant Cat?",
+      "button text": ["Cat", "Mouse", "Cow"],
+      "button functions": [right, wrong, wrong],
+      text: "In the original Castle Crashers game, what was the giant monster that chases you through the barn?",
       answer: "'Poop or Sweat'"
     },
     {
@@ -217,19 +217,15 @@ const locations = [
   ];
 
   const attackTexts = [
-    {front: "\n \nYou attack it with your ", 
-    back: "."},
-
-    {front: "\n \nYour ",
-      back: " slashes the monster's face!"
+    {front: "\n \nYou attack it with your " + weapons[currentWeapon].name + "."},
+    {front: "\n \nYour " + weapons[currentWeapon].name + " slashes the monster's face!"
     },
-
-    {front: "\n \nYou are glad you have your trusty ",
-      back: " as you attack the monster."
+    {front: "\n \nYou are glad you have your trusty " + weapons[currentWeapon].name + " as you attack the monster."
     },
-    {front: "\n \nYou lung at the monster with your ",
-      back: "!"
-    }
+    {front: "\n \nYou lung at the monster with your " + weapons[currentWeapon].name +  "!"
+    },
+    {front: "\n \nBOOM! BOW!"
+  }
   ]
   
 
@@ -308,7 +304,7 @@ function buyWeapon(){
     if(gold >= 50){
       currentWeapon++;
       gold -= 50;
-      let newWeapon = weapons[currentWeapon].name;
+      updateWeaponDisplay();
       goldText.innerText = gold;
       weaponText.innerText = newWeapon;
       text.innerText = "You now have a " + newWeapon + "!"
@@ -404,15 +400,9 @@ function goFight() {
 function attack() {
   text.innerText = "The " + monsters[fighting].name + " attacks.";
   let generator = Math.floor(Math.random() * 5)
-  if(generator < 5){
   text.innerText += attackTexts[generator].front;
-  text.innerText += weapons[currentWeapon].name;
-  text.innerText += attackTexts[generator].back;
-  }
-  else if(generator === 5){
-    text.innerText += "BOOM! BOW!"
-  }
-  let monsterAttack = ((monsters[currentWeapon].level) * Math.floor(Math.random() * 3 + 1));
+  
+  let monsterAttack = ((monsters[fighting].level) * Math.floor(Math.random() * 3 + 1));
   let playerAttack = ((weapons[currentWeapon].power) * Math.floor(Math.random() * 3 + 1));
   health -= monsterAttack;
   monsterHealth -= playerAttack;    
@@ -425,7 +415,17 @@ function attack() {
   } else if (monsterHealth <= 0) {
       defeatMonster();
 }
+console.log("Current weapon index:", currentWeapon);
+console.log("Current weapon name:", weapons[currentWeapon].name);
+
 }
+
+function updateWeaponDisplay() {
+  let newWeapon = weapons[currentWeapon].name;
+  console.log("Updating weapon display to:", newWeapon); // Debug output
+  weaponText.innerText = newWeapon;
+}
+
 function defeatMonster(){
 
   if(fighting < 5){
